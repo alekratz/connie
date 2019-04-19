@@ -6,7 +6,7 @@ This is a stupid concatenative programming project. Examples are in `examples/` 
 
 Clone:
 
-`git clone github.com/alekratz/connie.git`
+`git clone https://github.com/alekratz/connie`
 
 Install:
 
