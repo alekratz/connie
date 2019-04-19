@@ -38,7 +38,7 @@ looper
 "> " print
 input =name
 [
-    { "Nice to meet you, fool. You utter moron. You complete, succinct guttersnipe." println }
+    { "Nice to meet you, fool." println }
         { $name "Max" == }
     { "Nice to meet you, beautiful." println }
         { $name "Interpal" == }
