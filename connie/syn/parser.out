@@ -1,0 +1,473 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> body
+Rule 1     body -> atom body
+Rule 2     body -> <empty>
+Rule 3     atom -> quote
+Rule 4     atom -> value
+Rule 5     atom -> assign
+Rule 6     atom -> list
+Rule 7     atom -> sym
+Rule 8     atom -> ident
+Rule 9     ident -> IDENT
+Rule 10    sym -> SYM
+Rule 11    list -> LBRACKET body RBRACKET
+Rule 12    assign -> SET
+Rule 13    quote -> LBRACE body RBRACE
+Rule 14    value -> STR_LIT
+Rule 15    value -> NUM_LIT
+Rule 16    value -> VAR
+
+Terminals, with rules where they appear
+
+IDENT                : 9
+LBRACE               : 13
+LBRACKET             : 11
+NUM_LIT              : 15
+RBRACE               : 13
+RBRACKET             : 11
+SET                  : 12
+STR_LIT              : 14
+SYM                  : 10
+VAR                  : 16
+error                : 
+
+Nonterminals, with rules where they appear
+
+assign               : 5
+atom                 : 1
+body                 : 1 11 13 0
+ident                : 8
+list                 : 6
+quote                : 3
+sym                  : 7
+value                : 4
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . body
+    (1) body -> . atom body
+    (2) body -> .
+    (3) atom -> . quote
+    (4) atom -> . value
+    (5) atom -> . assign
+    (6) atom -> . list
+    (7) atom -> . sym
+    (8) atom -> . ident
+    (13) quote -> . LBRACE body RBRACE
+    (14) value -> . STR_LIT
+    (15) value -> . NUM_LIT
+    (16) value -> . VAR
+    (12) assign -> . SET
+    (11) list -> . LBRACKET body RBRACKET
+    (10) sym -> . SYM
+    (9) ident -> . IDENT
+
+    $end            reduce using rule 2 (body -> .)
+    LBRACE          shift and go to state 9
+    STR_LIT         shift and go to state 10
+    NUM_LIT         shift and go to state 11
+    VAR             shift and go to state 12
+    SET             shift and go to state 13
+    LBRACKET        shift and go to state 14
+    SYM             shift and go to state 15
+    IDENT           shift and go to state 16
+
+    body                           shift and go to state 1
+    atom                           shift and go to state 2
+    quote                          shift and go to state 3
+    value                          shift and go to state 4
+    assign                         shift and go to state 5
+    list                           shift and go to state 6
+    sym                            shift and go to state 7
+    ident                          shift and go to state 8
+
+state 1
+
+    (0) S' -> body .
+
+
+
+state 2
+
+    (1) body -> atom . body
+    (1) body -> . atom body
+    (2) body -> .
+    (3) atom -> . quote
+    (4) atom -> . value
+    (5) atom -> . assign
+    (6) atom -> . list
+    (7) atom -> . sym
+    (8) atom -> . ident
+    (13) quote -> . LBRACE body RBRACE
+    (14) value -> . STR_LIT
+    (15) value -> . NUM_LIT
+    (16) value -> . VAR
+    (12) assign -> . SET
+    (11) list -> . LBRACKET body RBRACKET
+    (10) sym -> . SYM
+    (9) ident -> . IDENT
+
+    $end            reduce using rule 2 (body -> .)
+    RBRACE          reduce using rule 2 (body -> .)
+    RBRACKET        reduce using rule 2 (body -> .)
+    LBRACE          shift and go to state 9
+    STR_LIT         shift and go to state 10
+    NUM_LIT         shift and go to state 11
+    VAR             shift and go to state 12
+    SET             shift and go to state 13
+    LBRACKET        shift and go to state 14
+    SYM             shift and go to state 15
+    IDENT           shift and go to state 16
+
+    atom                           shift and go to state 2
+    body                           shift and go to state 17
+    quote                          shift and go to state 3
+    value                          shift and go to state 4
+    assign                         shift and go to state 5
+    list                           shift and go to state 6
+    sym                            shift and go to state 7
+    ident                          shift and go to state 8
+
+state 3
+
+    (3) atom -> quote .
+
+    LBRACE          reduce using rule 3 (atom -> quote .)
+    STR_LIT         reduce using rule 3 (atom -> quote .)
+    NUM_LIT         reduce using rule 3 (atom -> quote .)
+    VAR             reduce using rule 3 (atom -> quote .)
+    SET             reduce using rule 3 (atom -> quote .)
+    LBRACKET        reduce using rule 3 (atom -> quote .)
+    SYM             reduce using rule 3 (atom -> quote .)
+    IDENT           reduce using rule 3 (atom -> quote .)
+    $end            reduce using rule 3 (atom -> quote .)
+    RBRACE          reduce using rule 3 (atom -> quote .)
+    RBRACKET        reduce using rule 3 (atom -> quote .)
+
+
+state 4
+
+    (4) atom -> value .
+
+    LBRACE          reduce using rule 4 (atom -> value .)
+    STR_LIT         reduce using rule 4 (atom -> value .)
+    NUM_LIT         reduce using rule 4 (atom -> value .)
+    VAR             reduce using rule 4 (atom -> value .)
+    SET             reduce using rule 4 (atom -> value .)
+    LBRACKET        reduce using rule 4 (atom -> value .)
+    SYM             reduce using rule 4 (atom -> value .)
+    IDENT           reduce using rule 4 (atom -> value .)
+    $end            reduce using rule 4 (atom -> value .)
+    RBRACE          reduce using rule 4 (atom -> value .)
+    RBRACKET        reduce using rule 4 (atom -> value .)
+
+
+state 5
+
+    (5) atom -> assign .
+
+    LBRACE          reduce using rule 5 (atom -> assign .)
+    STR_LIT         reduce using rule 5 (atom -> assign .)
+    NUM_LIT         reduce using rule 5 (atom -> assign .)
+    VAR             reduce using rule 5 (atom -> assign .)
+    SET             reduce using rule 5 (atom -> assign .)
+    LBRACKET        reduce using rule 5 (atom -> assign .)
+    SYM             reduce using rule 5 (atom -> assign .)
+    IDENT           reduce using rule 5 (atom -> assign .)
+    $end            reduce using rule 5 (atom -> assign .)
+    RBRACE          reduce using rule 5 (atom -> assign .)
+    RBRACKET        reduce using rule 5 (atom -> assign .)
+
+
+state 6
+
+    (6) atom -> list .
+
+    LBRACE          reduce using rule 6 (atom -> list .)
+    STR_LIT         reduce using rule 6 (atom -> list .)
+    NUM_LIT         reduce using rule 6 (atom -> list .)
+    VAR             reduce using rule 6 (atom -> list .)
+    SET             reduce using rule 6 (atom -> list .)
+    LBRACKET        reduce using rule 6 (atom -> list .)
+    SYM             reduce using rule 6 (atom -> list .)
+    IDENT           reduce using rule 6 (atom -> list .)
+    $end            reduce using rule 6 (atom -> list .)
+    RBRACE          reduce using rule 6 (atom -> list .)
+    RBRACKET        reduce using rule 6 (atom -> list .)
+
+
+state 7
+
+    (7) atom -> sym .
+
+    LBRACE          reduce using rule 7 (atom -> sym .)
+    STR_LIT         reduce using rule 7 (atom -> sym .)
+    NUM_LIT         reduce using rule 7 (atom -> sym .)
+    VAR             reduce using rule 7 (atom -> sym .)
+    SET             reduce using rule 7 (atom -> sym .)
+    LBRACKET        reduce using rule 7 (atom -> sym .)
+    SYM             reduce using rule 7 (atom -> sym .)
+    IDENT           reduce using rule 7 (atom -> sym .)
+    $end            reduce using rule 7 (atom -> sym .)
+    RBRACE          reduce using rule 7 (atom -> sym .)
+    RBRACKET        reduce using rule 7 (atom -> sym .)
+
+
+state 8
+
+    (8) atom -> ident .
+
+    LBRACE          reduce using rule 8 (atom -> ident .)
+    STR_LIT         reduce using rule 8 (atom -> ident .)
+    NUM_LIT         reduce using rule 8 (atom -> ident .)
+    VAR             reduce using rule 8 (atom -> ident .)
+    SET             reduce using rule 8 (atom -> ident .)
+    LBRACKET        reduce using rule 8 (atom -> ident .)
+    SYM             reduce using rule 8 (atom -> ident .)
+    IDENT           reduce using rule 8 (atom -> ident .)
+    $end            reduce using rule 8 (atom -> ident .)
+    RBRACE          reduce using rule 8 (atom -> ident .)
+    RBRACKET        reduce using rule 8 (atom -> ident .)
+
+
+state 9
+
+    (13) quote -> LBRACE . body RBRACE
+    (1) body -> . atom body
+    (2) body -> .
+    (3) atom -> . quote
+    (4) atom -> . value
+    (5) atom -> . assign
+    (6) atom -> . list
+    (7) atom -> . sym
+    (8) atom -> . ident
+    (13) quote -> . LBRACE body RBRACE
+    (14) value -> . STR_LIT
+    (15) value -> . NUM_LIT
+    (16) value -> . VAR
+    (12) assign -> . SET
+    (11) list -> . LBRACKET body RBRACKET
+    (10) sym -> . SYM
+    (9) ident -> . IDENT
+
+    RBRACE          reduce using rule 2 (body -> .)
+    LBRACE          shift and go to state 9
+    STR_LIT         shift and go to state 10
+    NUM_LIT         shift and go to state 11
+    VAR             shift and go to state 12
+    SET             shift and go to state 13
+    LBRACKET        shift and go to state 14
+    SYM             shift and go to state 15
+    IDENT           shift and go to state 16
+
+    body                           shift and go to state 18
+    atom                           shift and go to state 2
+    quote                          shift and go to state 3
+    value                          shift and go to state 4
+    assign                         shift and go to state 5
+    list                           shift and go to state 6
+    sym                            shift and go to state 7
+    ident                          shift and go to state 8
+
+state 10
+
+    (14) value -> STR_LIT .
+
+    LBRACE          reduce using rule 14 (value -> STR_LIT .)
+    STR_LIT         reduce using rule 14 (value -> STR_LIT .)
+    NUM_LIT         reduce using rule 14 (value -> STR_LIT .)
+    VAR             reduce using rule 14 (value -> STR_LIT .)
+    SET             reduce using rule 14 (value -> STR_LIT .)
+    LBRACKET        reduce using rule 14 (value -> STR_LIT .)
+    SYM             reduce using rule 14 (value -> STR_LIT .)
+    IDENT           reduce using rule 14 (value -> STR_LIT .)
+    $end            reduce using rule 14 (value -> STR_LIT .)
+    RBRACE          reduce using rule 14 (value -> STR_LIT .)
+    RBRACKET        reduce using rule 14 (value -> STR_LIT .)
+
+
+state 11
+
+    (15) value -> NUM_LIT .
+
+    LBRACE          reduce using rule 15 (value -> NUM_LIT .)
+    STR_LIT         reduce using rule 15 (value -> NUM_LIT .)
+    NUM_LIT         reduce using rule 15 (value -> NUM_LIT .)
+    VAR             reduce using rule 15 (value -> NUM_LIT .)
+    SET             reduce using rule 15 (value -> NUM_LIT .)
+    LBRACKET        reduce using rule 15 (value -> NUM_LIT .)
+    SYM             reduce using rule 15 (value -> NUM_LIT .)
+    IDENT           reduce using rule 15 (value -> NUM_LIT .)
+    $end            reduce using rule 15 (value -> NUM_LIT .)
+    RBRACE          reduce using rule 15 (value -> NUM_LIT .)
+    RBRACKET        reduce using rule 15 (value -> NUM_LIT .)
+
+
+state 12
+
+    (16) value -> VAR .
+
+    LBRACE          reduce using rule 16 (value -> VAR .)
+    STR_LIT         reduce using rule 16 (value -> VAR .)
+    NUM_LIT         reduce using rule 16 (value -> VAR .)
+    VAR             reduce using rule 16 (value -> VAR .)
+    SET             reduce using rule 16 (value -> VAR .)
+    LBRACKET        reduce using rule 16 (value -> VAR .)
+    SYM             reduce using rule 16 (value -> VAR .)
+    IDENT           reduce using rule 16 (value -> VAR .)
+    $end            reduce using rule 16 (value -> VAR .)
+    RBRACE          reduce using rule 16 (value -> VAR .)
+    RBRACKET        reduce using rule 16 (value -> VAR .)
+
+
+state 13
+
+    (12) assign -> SET .
+
+    LBRACE          reduce using rule 12 (assign -> SET .)
+    STR_LIT         reduce using rule 12 (assign -> SET .)
+    NUM_LIT         reduce using rule 12 (assign -> SET .)
+    VAR             reduce using rule 12 (assign -> SET .)
+    SET             reduce using rule 12 (assign -> SET .)
+    LBRACKET        reduce using rule 12 (assign -> SET .)
+    SYM             reduce using rule 12 (assign -> SET .)
+    IDENT           reduce using rule 12 (assign -> SET .)
+    $end            reduce using rule 12 (assign -> SET .)
+    RBRACE          reduce using rule 12 (assign -> SET .)
+    RBRACKET        reduce using rule 12 (assign -> SET .)
+
+
+state 14
+
+    (11) list -> LBRACKET . body RBRACKET
+    (1) body -> . atom body
+    (2) body -> .
+    (3) atom -> . quote
+    (4) atom -> . value
+    (5) atom -> . assign
+    (6) atom -> . list
+    (7) atom -> . sym
+    (8) atom -> . ident
+    (13) quote -> . LBRACE body RBRACE
+    (14) value -> . STR_LIT
+    (15) value -> . NUM_LIT
+    (16) value -> . VAR
+    (12) assign -> . SET
+    (11) list -> . LBRACKET body RBRACKET
+    (10) sym -> . SYM
+    (9) ident -> . IDENT
+
+    RBRACKET        reduce using rule 2 (body -> .)
+    LBRACE          shift and go to state 9
+    STR_LIT         shift and go to state 10
+    NUM_LIT         shift and go to state 11
+    VAR             shift and go to state 12
+    SET             shift and go to state 13
+    LBRACKET        shift and go to state 14
+    SYM             shift and go to state 15
+    IDENT           shift and go to state 16
+
+    body                           shift and go to state 19
+    atom                           shift and go to state 2
+    quote                          shift and go to state 3
+    value                          shift and go to state 4
+    assign                         shift and go to state 5
+    list                           shift and go to state 6
+    sym                            shift and go to state 7
+    ident                          shift and go to state 8
+
+state 15
+
+    (10) sym -> SYM .
+
+    LBRACE          reduce using rule 10 (sym -> SYM .)
+    STR_LIT         reduce using rule 10 (sym -> SYM .)
+    NUM_LIT         reduce using rule 10 (sym -> SYM .)
+    VAR             reduce using rule 10 (sym -> SYM .)
+    SET             reduce using rule 10 (sym -> SYM .)
+    LBRACKET        reduce using rule 10 (sym -> SYM .)
+    SYM             reduce using rule 10 (sym -> SYM .)
+    IDENT           reduce using rule 10 (sym -> SYM .)
+    $end            reduce using rule 10 (sym -> SYM .)
+    RBRACE          reduce using rule 10 (sym -> SYM .)
+    RBRACKET        reduce using rule 10 (sym -> SYM .)
+
+
+state 16
+
+    (9) ident -> IDENT .
+
+    LBRACE          reduce using rule 9 (ident -> IDENT .)
+    STR_LIT         reduce using rule 9 (ident -> IDENT .)
+    NUM_LIT         reduce using rule 9 (ident -> IDENT .)
+    VAR             reduce using rule 9 (ident -> IDENT .)
+    SET             reduce using rule 9 (ident -> IDENT .)
+    LBRACKET        reduce using rule 9 (ident -> IDENT .)
+    SYM             reduce using rule 9 (ident -> IDENT .)
+    IDENT           reduce using rule 9 (ident -> IDENT .)
+    $end            reduce using rule 9 (ident -> IDENT .)
+    RBRACE          reduce using rule 9 (ident -> IDENT .)
+    RBRACKET        reduce using rule 9 (ident -> IDENT .)
+
+
+state 17
+
+    (1) body -> atom body .
+
+    $end            reduce using rule 1 (body -> atom body .)
+    RBRACE          reduce using rule 1 (body -> atom body .)
+    RBRACKET        reduce using rule 1 (body -> atom body .)
+
+
+state 18
+
+    (13) quote -> LBRACE body . RBRACE
+
+    RBRACE          shift and go to state 20
+
+
+state 19
+
+    (11) list -> LBRACKET body . RBRACKET
+
+    RBRACKET        shift and go to state 21
+
+
+state 20
+
+    (13) quote -> LBRACE body RBRACE .
+
+    LBRACE          reduce using rule 13 (quote -> LBRACE body RBRACE .)
+    STR_LIT         reduce using rule 13 (quote -> LBRACE body RBRACE .)
+    NUM_LIT         reduce using rule 13 (quote -> LBRACE body RBRACE .)
+    VAR             reduce using rule 13 (quote -> LBRACE body RBRACE .)
+    SET             reduce using rule 13 (quote -> LBRACE body RBRACE .)
+    LBRACKET        reduce using rule 13 (quote -> LBRACE body RBRACE .)
+    SYM             reduce using rule 13 (quote -> LBRACE body RBRACE .)
+    IDENT           reduce using rule 13 (quote -> LBRACE body RBRACE .)
+    $end            reduce using rule 13 (quote -> LBRACE body RBRACE .)
+    RBRACE          reduce using rule 13 (quote -> LBRACE body RBRACE .)
+    RBRACKET        reduce using rule 13 (quote -> LBRACE body RBRACE .)
+
+
+state 21
+
+    (11) list -> LBRACKET body RBRACKET .
+
+    LBRACE          reduce using rule 11 (list -> LBRACKET body RBRACKET .)
+    STR_LIT         reduce using rule 11 (list -> LBRACKET body RBRACKET .)
+    NUM_LIT         reduce using rule 11 (list -> LBRACKET body RBRACKET .)
+    VAR             reduce using rule 11 (list -> LBRACKET body RBRACKET .)
+    SET             reduce using rule 11 (list -> LBRACKET body RBRACKET .)
+    LBRACKET        reduce using rule 11 (list -> LBRACKET body RBRACKET .)
+    SYM             reduce using rule 11 (list -> LBRACKET body RBRACKET .)
+    IDENT           reduce using rule 11 (list -> LBRACKET body RBRACKET .)
+    $end            reduce using rule 11 (list -> LBRACKET body RBRACKET .)
+    RBRACE          reduce using rule 11 (list -> LBRACKET body RBRACKET .)
+    RBRACKET        reduce using rule 11 (list -> LBRACKET body RBRACKET .)
+

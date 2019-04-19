@@ -1,0 +1,3 @@
+{ =x } =discard
+
+{ ^len random * int index } =choose

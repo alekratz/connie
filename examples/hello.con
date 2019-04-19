@@ -1,0 +1,46 @@
+"base.con" import
+
+# Print a greeting
+"Hell " print
+
+# Store a value in "world"
+"world" =world
+
+# Print the value
+$world println
+
+# This works too - the latter pushes a reference, and it gets dereferenced when it's popped.
+# This dereferences the "world" variable immediately.
+#world println
+
+"Yo mama so fat, " print
+
+[
+    "I took a picture of her at Christmas, and it's still printing!"
+    "when she sits around the house, she sits AROUND the house!"
+    "she could eat ten pizzas!"
+] =yo-mama
+
+$yo-mama choose println
+
+{
+    0 =i
+    {
+        $i 1 + =i
+        $i println
+    } 3 * =loop
+    loop
+} =looper
+
+looper
+
+"What is your name?" println
+"> " print
+input =name
+[
+    { "Nice to meet you, fool. You utter moron. You complete, succinct guttersnipe." println }
+        { $name "Max" == }
+    { "Nice to meet you, beautiful." println }
+        { $name "Interpal" == }
+    { "Nice to meet you, " print $name print "." println }
+] select
