@@ -4,6 +4,10 @@ This is a stupid concatenative programming project. Examples are in `examples/` 
 
 # Using
 
+Requirements:
+
+* Python 3.7+ (dataclasses)
+
 Clone:
 
 `git clone https://github.com/alekratz/connie`
