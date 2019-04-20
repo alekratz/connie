@@ -35,6 +35,15 @@ class Value:
 
 
 def check_types(expected, got):
+    """
+    Checks a list of expected types against another list of gathered types.
+
+    :param expected: the expected types. This should be a tuple of N types or typesets (a tuple of
+                     allowed types).
+    :param got: the list of types that are being checked.
+
+    The implementation is dense (sorry).
+    """
     assert len(got) == len(expected)
     bindings = {}
     for g, e in zip(got, expected):

@@ -1,0 +1,2 @@
+{ str 1 write } =print
+{ str 1 write '\n' 1 write } =println

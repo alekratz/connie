@@ -1,10 +1,14 @@
 from pathlib import Path
 import random
 import math
+import os
 from connie.run import util
 from connie.run.value import *
 from connie.syn.ast import *
 from connie.syn.parse import Parse
+
+
+IO_BUF_SIZE = 4096
 
 
 class Storage:
@@ -75,10 +79,13 @@ class Run(Visitor):
                 contents = fp.read()
         except Exception as ex:
             raise Exception('could not import "{}": {}'.format(path, ex))
-        body = Parse(contents, path).parse()
         self.search_paths = [path.parent] + self.search_paths
-        self.run(body)
+        self.run_str(contents, path)
         self.search_paths = self.search_paths[1:]
+
+    def run_str(self, source: str, source_name: str):
+        body = Parse(source, source_name).parse()
+        self.run(body)
 
     def run(self, body: Body):
         for ast in body:
@@ -127,14 +134,6 @@ class Run(Visitor):
         self.visit_body(ls.value)
         layer = self.storage.pop_stack_layer()
         self.storage.push(Value(ValueKind.List, layer))
-
-    def builtin_print(self):
-        value = self.storage.pop()
-        print(value.value, end="")
-
-    def builtin_println(self):
-        value = self.storage.pop()
-        print(value.value)
 
     def builtin_input(self):
         value = input()
@@ -203,7 +202,7 @@ class Run(Visitor):
 
     def builtin_str(self):
         value = self.storage.pop()
-        self.storage.push(Value(ValueKind.Num, str(value)))
+        self.storage.push(Value(ValueKind.Str, str(value)))
 
     def builtin_dupe(self):
         # (T) -> T T
@@ -251,27 +250,6 @@ class Run(Visitor):
         else:
             result = lhs.value + rhs.value
         self.storage.push(Value(lhs.kind, result))
-
-    def builtin_mod(self):
-        # (T, U) -> V
-        # TODO gather opinions: does it make sense to use mod operator with RHS be a list, LHS be an
-        # int, and use that as the indexing function?
-        lhs = self.storage.pop()
-        rhs = self.storage.pop()
-
-    def builtin_divide(self):
-        # (int, int) -> int
-        lhs = self.storage.pop()
-        rhs = self.storage.pop()
-
-    def builtin_sub(self):
-        # (int, int) -> int
-        lhs = self.storage.pop()
-        rhs = self.storage.pop()
-
-    def builtin_negate(self):
-        # (int) -> int
-        value = self.storage.pop()
 
     def builtin_equals(self):
         # (T, U) -> int
@@ -323,11 +301,48 @@ class Run(Visitor):
         path = Path(value.value)
         self.run_path(path)
 
+    def builtin_read(self):
+        handle = self.storage.pop()
+        if handle.kind == ValueKind.Num:
+            # TODO sink/source impl?
+            content = bytes()
+            hdl = handle.value
+            while True:
+                got = os.read(hdl, IO_BUF_SIZE)
+                if not got:
+                    break
+                content += got
+            content = content.decode()
+        elif handle.kind == ValueKind.Str:
+            # open r vs. rb?
+            # encoding?
+            with open(handle.value) as fp:
+                content = fp.read()
+        self.storage.push(Value(ValueKind.Str, content))
+
+    def builtin_write(self):
+        handle = self.storage.pop()
+        buf = self.storage.pop()
+        if buf.kind != ValueKind.Str:
+            raise Exception(
+                "invalid `write` call on value kind `{}`: "
+                "must be a string".format(buf.kind)
+            )
+        if handle.kind == ValueKind.Num:
+            content = buf.value.encode()
+            hdl = handle.value
+            while content:
+                wrote = os.write(hdl, content)
+                content = content[wrote:]
+        elif handle.kind == ValueKind.Str:
+            with open(handle.value) as fp:
+                fp.write(buf)
+
 
 BUILTINS = {
-    "print": Run.builtin_print,
-    "println": Run.builtin_println,
+    # to remove
     "input": Run.builtin_input,
+
     "random": Run.builtin_random,
     "ceil": Run.builtin_ceil,
     "floor": Run.builtin_floor,
@@ -337,13 +352,15 @@ BUILTINS = {
     "str": Run.builtin_str,
     "select": Run.builtin_select,
     "import": Run.builtin_import,
+
+    # TODO readb, writeb
+    "read": Run.builtin_read,
+    "write": Run.builtin_write,
+    #"eval": Run.builtin_eval,
+
     "^": Run.builtin_dupe,
     "*": Run.builtin_mult,
     "+": Run.builtin_plus,
-    "%": Run.builtin_mod,
-    "/": Run.builtin_divide,
-    "-": Run.builtin_sub,
-    "_": Run.builtin_negate,
     "==": Run.builtin_equals,
     "!=": Run.builtin_not_equals,
     "!": Run.builtin_bang,

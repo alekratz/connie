@@ -1,4 +1,6 @@
 "base.con" import
+"io.con" import
+
 
 # Print a greeting
 "Hell " print
